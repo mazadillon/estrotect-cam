@@ -9,7 +9,7 @@ s, img = cam.read()
 mod_img = img
 old_cx = old_cy = 0
 
-ORANGE_MIN = np.array([170, 100, 100],np.uint8)
+ORANGE_MIN = np.array([160, 50, 50],np.uint8)
 ORANGE_MAX = np.array([180, 255, 255],np.uint8)
 
 winName = "Movement Indicator"
@@ -43,8 +43,9 @@ while s:
 					cv2.imwrite("out" + datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")+".jpg",img) # Save it in a timestamped file.
 					old_cx = cx
 					old_cy = cy
-	key = cv2.waitKey(10)
-	if key == 27:
+	cv2.imwrite("latest.jpg",img)
+	key = cv2.waitKey(30)
+	if key != -1:
 		cv2.destroyWindow(winName)
 		cv2.destroyWindow('thresh')
 		break
