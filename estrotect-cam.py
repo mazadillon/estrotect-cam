@@ -5,12 +5,12 @@ import datetime
 # Initially based on code by Abid Rahman K
 
 cam = cv2.VideoCapture(1)
-cam.set(3,352)
-cam.set(4,288)
+cam.set(3,360)
+cam.set(4,360)
 s, img = cam.read()
 brand_cam = cv2.VideoCapture(0)
-brand_cam.set(3,640)
-brand_cam.set(4,480)
+brand_cam.set(3,360)
+brand_cam.set(4,360)
 
 mod_img = img
 old_cx = old_cy = 0
@@ -64,8 +64,9 @@ while s:
     if timediff.seconds > 10:
         rt_save_time = datetime.datetime.now()
         cv2.imwrite("/home/matt/estrotect-cam/latest.jpg",img)
+        cv2.imwrite("/home/matt/estrotect-cam/latest-brand.jpg",brand_img)
     key = cv2.waitKey(30)
-    if key != -1:
+    if key == 27:
         cv2.destroyWindow(winName)
         cv2.destroyWindow('brand')
         break
